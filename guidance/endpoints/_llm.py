@@ -5,7 +5,7 @@ import json
 import guidance
 import types
 
-from .caches import DiskCache
+from .caches import MemCache
 
 class LLMMeta(type):
     def __init__(cls, *args, **kwargs):
@@ -13,7 +13,7 @@ class LLMMeta(type):
     @property
     def cache(cls):
         if cls._cache is None:
-            cls._cache = DiskCache(cls.llm_name)
+            cls._cache = MemCache(cls.llm_name)
         return cls._cache
     @cache.setter
     def cache(cls, value):
